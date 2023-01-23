@@ -16,7 +16,7 @@
 	"icon": "assets/fabrissentials/icon.png",
 	"environment": "server",
 	"entrypoints": {
-		"main": [
+		"server": [
 			"net.forsaken_borders.Fabrissentials"
 		]
 	},
