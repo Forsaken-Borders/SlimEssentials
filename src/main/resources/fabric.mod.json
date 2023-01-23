@@ -3,7 +3,7 @@
 	"id": "fabrissentials",
 	"version": "${version}",
 	"name": "Fabrissentials",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Fabrissentials provides a variety of essential commands",
 	"authors": [
 		"Lunar#9860",
 		"AaronVB#6662"
@@ -17,11 +17,11 @@
 	"environment": "server",
 	"entrypoints": {
 		"main": [
-			"net.forsaken_borders.Fabrissentals"
+			"net.forsaken_borders.Fabrissentials"
 		]
 	},
 	"mixins": [
-		"fabrissentals.mixins.json"
+		"fabrissentials.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.14.13",
