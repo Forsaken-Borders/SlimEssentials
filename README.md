@@ -4,7 +4,7 @@ Essential commands include, for example, /home, /warp, /tpr, /mail, and so on.
 
 ## Permissions
 In the future, we'd like to support LuckPerms as an optional dependency, but all commands can also be used with vanilla operator levels,
-which can be checked in the 'ops.json' file of your server's 'server.properties'.
+which can be checked in the 'ops.json' file in your server directory.
 You can find an explaination of the operator levels below.
 
 - Operators with level 1 can make changes in the otherwise protected spawn area.
