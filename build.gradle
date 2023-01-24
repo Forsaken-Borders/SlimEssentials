@@ -90,7 +90,7 @@ import com.modrinth.minotaur.dependencies.DependencyType
 import com.modrinth.minotaur.dependencies.ModDependency
 modrinth {
     projectId = '4egcgHJE'
-    versionNumber = 'project.version'
+    versionNumber = project.version
     uploadFile = remapJar
     gameVersions = [project.minecraft_version]
     loaders = ['fabric']
