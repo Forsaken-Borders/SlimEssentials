@@ -98,4 +98,5 @@ modrinth {
             new ModDependency('P7dR8mSH', DependencyType.REQUIRED), // Fabric API
             new ModDependency('Vebnzrzj', DependencyType.OPTIONAL) // LuckPerms
     ]
+    changelog = 'No changelog was specified.'
 }
