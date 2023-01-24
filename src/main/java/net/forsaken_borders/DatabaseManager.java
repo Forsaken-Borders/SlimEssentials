@@ -51,6 +51,7 @@ public final class DatabaseManager {
 		DATABASE_PROPERTIES.setProperty("foreign_keys", "on");
 
 		try {
+			Class.forName("org.sqlite.JDBC");
 			Fabrissentials.databaseConnection = DriverManager.getConnection("jdbc:sqlite:database.db", DATABASE_PROPERTIES);
 		} catch (Exception error) {
 			LOGGER.error("Failed to create the database connection!", error);
