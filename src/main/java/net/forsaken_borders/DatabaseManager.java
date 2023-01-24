@@ -11,11 +11,30 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class DatabaseManager {
+	/***
+	 * The current version of the database. This is used for database migrations and
+	 * future proofing. Modify this when tables have changed in any form.
+	 */
 	private static final int DATABASE_VERSION = 1;
+
+	/***
+	 * The properties that are used when creating the database connection. This is
+	 * used to set the database properties, like the journal mode, foreign keys and
+	 * more.
+	 */
 	private static final Properties DATABASE_PROPERTIES = new Properties();
 
+	/***
+	 * The logger that is used to log errors and other messages.
+	 */
 	public static final Logger LOGGER = LoggerFactory.getLogger("fabrissentials.database");
 
+	/***
+	 * Creates the database connection and creates the tables if the database is
+	 * new.
+	 * If the database is not new, it will migrate the data from the old database
+	 * format into the new one.
+	 */
 	public static void create() {
 		// TODO: Make the Database File Path changeable via a Config
 		boolean newDatabase = !new File("database.db").exists();
@@ -49,6 +68,12 @@ public class DatabaseManager {
 		}
 	}
 
+	/***
+	 * Performs a database migration. This will migrate the data from the old
+	 * database format into the new one. This will also set the database version to
+	 * the current version. This method will not do anything if the database is on
+	 * the current version. Under no circumstances should data loss occur.
+	 */
 	public static void migrate() {
 		assert Fabrissentials.databaseConnection != null;
 
@@ -78,6 +103,10 @@ public class DatabaseManager {
 		}
 	}
 
+	/***
+	 * Creates the tables for the database. This will also set the database version
+	 * to the current version.
+	 */
 	public static void populate() {
 		assert Fabrissentials.databaseConnection != null;
 		LOGGER.info("Creating the database...");
@@ -111,6 +140,10 @@ public class DatabaseManager {
 		}
 	}
 
+	/***
+	 * Closes the database connection and performs some "housekeeping" on the
+	 * database.
+	 */
 	public static void close() {
 		if (Fabrissentials.databaseConnection != null) {
 			try {
