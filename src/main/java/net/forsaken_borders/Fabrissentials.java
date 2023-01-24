@@ -1,20 +1,21 @@
 package net.forsaken_borders;
 
 import net.fabricmc.api.DedicatedServerModInitializer;
-
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 public class Fabrissentials implements DedicatedServerModInitializer {
 
 	private static final Properties DATABASE_PROPERTIES = new Properties();
-	private static final int DATABASE_VERSION = 1;
 
 	public static @Nullable Connection databaseConnection;
 	public static final Logger LOGGER = LoggerFactory.getLogger("fabrissentials");
@@ -42,38 +43,25 @@ public class Fabrissentials implements DedicatedServerModInitializer {
 				}
 
 				if (newDatabase) {
-					//TODO: Create the needed Tables here. If we use statements with
+					LOGGER.info("Seems like this is the first time you are running Fabrissentials.");
+					LOGGER.info("Creating a Database, this might take a while...");
 
-					LOGGER.info("new db");
-
-					// This just lets us check if the Database is from an old version of the mod. If so, it will be migrated below
-					// We can't use a PreparedStatement here. Java is dumb and throws org.sqlite.SQLiteException: SQL error or missing database (near "?": syntax error)
 					Statement statement = databaseConnection.createStatement();
-					statement.execute("PRAGMA user_version = " + DATABASE_VERSION + ";");
+
+					statement.execute("CREATE TABLE IF NOT EXISTS \"Homes\" (\"HomeID\" TEXT NOT NULL, \"PlayerID\" BLOB NOT NULL, \"WorldID\" BLOB NOT NULL, \"X\" REAL NOT NULL, \"Y\" REAL NOT NULL, \"Z\" REAL NOT NULL, \"Pitch\" REAL NOT NULL, \"Yaw\" REAL NOT NULL);");
+					statement.execute("ALTER TABLE \"Homes\" ADD CONSTRAINT \"UniqueHomeIdPerPlayer\" UNIQUE (\"HomeID\", \"PlayerID\");");
+
+					statement.execute("CREATE TABLE IF NOT EXISTS \"Warps\" (\"WarpID\" TEXT NOT NULL, \"PlayerID\" BLOB NOT NULL, \"WorldID\" BLOB NOT NULL, \"X\" REAL NOT NULL, \"Y\" REAL NOT NULL, \"Z\" REAL NOT NULL, \"Pitch\" REAL NOT NULL, \"Yaw\" REAL NOT NULL);");
+					statement.execute("ALTER TABLE \"Warps\" ADD CONSTRAINT \"UniqueWarpId\" UNIQUE (\"WarpID\");");
+
 					statement.close();
-
-				} else {
-					// Check if the Database was created with an older version of SQLite. If yes, we should migrate it.
-
-					Statement statement = databaseConnection.createStatement();
-					ResultSet result = statement.executeQuery("PRAGMA user_version;");
-
-					if (!result.next()) {
-						//TODO: No Database version was set. What do we do?
-						//LOGGER.warn("how??");
-					}
-
-					if (result.getInt("user_version") != DATABASE_VERSION) {
-						//TODO: If we land here, we need to migrate!
-						//LOGGER.warn("The Database needs to be updated. This might take a while!");
-					}
 				}
 			} catch (SQLException exception) {
 				LOGGER.error("An Error occurred trying to load the Database!", exception);
 				return;
 			}
 
-			LOGGER.info("db open");
+			LOGGER.info("Database is ready.");
 		});
 
 		ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
@@ -96,7 +84,7 @@ public class Fabrissentials implements DedicatedServerModInitializer {
 				}
 			}
 
-			LOGGER.info("db closed");
+			LOGGER.info("Database closed. Goodbye!");
 		});
 
 		LOGGER.info("Hello Fabric world!");
