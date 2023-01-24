@@ -10,7 +10,7 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DatabaseManager {
+public final class DatabaseManager {
 	/***
 	 * The current version of the database. This is used for database migrations and
 	 * future proofing. Modify this when tables have changed in any form.
@@ -35,7 +35,7 @@ public class DatabaseManager {
 	 * If the database is not new, it will migrate the data from the old database
 	 * format into the new one.
 	 */
-	public static void create() {
+	public static void openDatabase() {
 		// TODO: Make the Database File Path changeable via a Config
 		boolean newDatabase = !new File("database.db").exists();
 
@@ -51,8 +51,7 @@ public class DatabaseManager {
 		DATABASE_PROPERTIES.setProperty("foreign_keys", "on");
 
 		try {
-			Fabrissentials.databaseConnection = DriverManager.getConnection("jdbc:sqlite:database.db",
-					DATABASE_PROPERTIES);
+			Fabrissentials.databaseConnection = DriverManager.getConnection("jdbc:sqlite:database.db", DATABASE_PROPERTIES);
 		} catch (Exception error) {
 			LOGGER.error("Failed to create the database connection!", error);
 			return;
@@ -60,11 +59,11 @@ public class DatabaseManager {
 
 		if (newDatabase) {
 			// If the database is new, we need to create the tables
-			populate();
+			setupDatabase();
 		} else {
 			// If the database is not new, we need to transfer the data from the old
 			// database into the new database format.
-			migrate();
+			migrateDatabase();
 		}
 	}
 
@@ -74,12 +73,12 @@ public class DatabaseManager {
 	 * the current version. This method will not do anything if the database is on
 	 * the current version. Under no circumstances should data loss occur.
 	 */
-	public static void migrate() {
+	public static void migrateDatabase() {
 		assert Fabrissentials.databaseConnection != null;
 
 		try {
 			Statement statement = Fabrissentials.databaseConnection.createStatement();
-			ResultSet versionResult = statement.executeQuery("PRAGMA schema.user_version;");
+			ResultSet versionResult = statement.executeQuery("PRAGMA user_version;");
 			int version = versionResult.getInt("user_version");
 
 			switch (version) {
@@ -89,10 +88,8 @@ public class DatabaseManager {
 				default:
 					// We're on an unknown version, likely a newer version than the current one.
 					// Do NOT attempt to touch the database as it may cause data loss.
-					LOGGER.error(
-							"The database is on an unknown version! ({}), please ensure you're using the latest version of Fabrissentials!",
-							version);
-					break;
+					LOGGER.error("The database is on an unknown version! ({}), please ensure you're using the latest version of Fabrissentials!", version);
+					return;
 			}
 
 			// Set the database version to the current version on a successful migration.
@@ -107,7 +104,7 @@ public class DatabaseManager {
 	 * Creates the tables for the database. This will also set the database version
 	 * to the current version.
 	 */
-	public static void populate() {
+	public static void setupDatabase() {
 		assert Fabrissentials.databaseConnection != null;
 		LOGGER.info("Creating the database...");
 
@@ -115,22 +112,14 @@ public class DatabaseManager {
 			Statement statement = Fabrissentials.databaseConnection.createStatement();
 
 			// Insert the current version of the database
-			statement.execute("PRAGMA schema.user_version = " + DATABASE_VERSION + ";");
+			statement.execute("PRAGMA user_version = " + DATABASE_VERSION + ";");
 
-			// Create the homes table for the /home command
-			statement.execute(
-					"CREATE TABLE IF NOT EXISTS \"Homes\" (\"HomeID\" TEXT NOT NULL, \"PlayerID\" BLOB NOT NULL, \"WorldID\" BLOB NOT NULL, \"X\" REAL NOT NULL, \"Y\" REAL NOT NULL, \"Z\" REAL NOT NULL, \"Pitch\" REAL NOT NULL, \"Yaw\" REAL NOT NULL);");
+			// Create the homes table for the /home command, and use a unique key to make sure a player cannot create two homes with the same name
+			statement.execute("CREATE TABLE IF NOT EXISTS \"Homes\" (\"HomeID\" TEXT NOT NULL, \"PlayerID\" BLOB NOT NULL, \"WorldID\" BLOB NOT NULL, \"X\" REAL NOT NULL, \"Y\" REAL NOT NULL, \"Z\" REAL NOT NULL, \"Pitch\" REAL NOT NULL, \"Yaw\" REAL NOT NULL);");
+			statement.execute("ALTER TABLE \"Homes\" ADD CONSTRAINT \"UniqueHomeIdPerPlayer\" UNIQUE (\"HomeID\", \"PlayerID\");");
 
-			// Ensure that each player doesn't have multiple homes with the same name,
-			// though there can be multiple homes with the same name, unique to each player
-			statement.execute(
-					"ALTER TABLE \"Homes\" ADD CONSTRAINT \"UniqueHomeIdPerPlayer\" UNIQUE (\"HomeID\", \"PlayerID\");");
-
-			// Create the warps table for the /warp command
-			statement.execute(
-					"CREATE TABLE IF NOT EXISTS \"Warps\" (\"WarpID\" TEXT NOT NULL, \"PlayerID\" BLOB NOT NULL, \"WorldID\" BLOB NOT NULL, \"X\" REAL NOT NULL, \"Y\" REAL NOT NULL, \"Z\" REAL NOT NULL, \"Pitch\" REAL NOT NULL, \"Yaw\" REAL NOT NULL);");
-
-			// Ensure that each warp doesn't have the same id.
+			// Create the warps table for the /warp command, and use a unique key to make sure each warp has a unique id
+			statement.execute("CREATE TABLE IF NOT EXISTS \"Warps\" (\"WarpID\" TEXT NOT NULL, \"PlayerID\" BLOB NOT NULL, \"WorldID\" BLOB NOT NULL, \"X\" REAL NOT NULL, \"Y\" REAL NOT NULL, \"Z\" REAL NOT NULL, \"Pitch\" REAL NOT NULL, \"Yaw\" REAL NOT NULL);");
 			statement.execute("ALTER TABLE \"Warps\" ADD CONSTRAINT \"UniqueWarpId\" UNIQUE (\"WarpID\");");
 
 			// Close the statement
@@ -144,7 +133,7 @@ public class DatabaseManager {
 	 * Closes the database connection and performs some "housekeeping" on the
 	 * database.
 	 */
-	public static void close() {
+	public static void closeDatabase() {
 		if (Fabrissentials.databaseConnection != null) {
 			try {
 				Statement statement = Fabrissentials.databaseConnection.createStatement();
@@ -154,12 +143,11 @@ public class DatabaseManager {
 				statement.execute("PRAGMA analysis_limit=1000;");
 
 				// "Housekeeping" - Aaron
+				// "Housekeeping" - Me
 				statement.execute("PRAGMA optimize;");
 				statement.close();
 			} catch (SQLException exception) {
-				LOGGER.warn(
-						"An unexpected error had occured, please report this to Fabrissentials' GitHub page!",
-						exception);
+				LOGGER.warn("An unexpected error has occurred, please report this to Fabrissentials' GitHub page!", exception);
 			}
 		}
 
@@ -167,9 +155,7 @@ public class DatabaseManager {
 			try {
 				Fabrissentials.databaseConnection.close();
 			} catch (SQLException exception) {
-				LOGGER.error(
-						"An unexpected error occurred trying to close the database. It's possible some data loss occured, please create a backup of the database before attempting to run Fabrissentials again.",
-						exception);
+				LOGGER.error("An unexpected error occurred trying to close the database. It's possible some data was lost. Please create a backup of the database before attempting to run Fabrissentials again.", exception);
 			}
 		}
 	}

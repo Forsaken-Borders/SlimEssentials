@@ -18,12 +18,12 @@ public class Fabrissentials implements DedicatedServerModInitializer {
 		ServerLifecycleEvents.SERVER_STARTING.register(server -> {
 			// This method will create the database, migrate it if required or create the
 			// tables if the database is new.
-			DatabaseManager.create();
+			DatabaseManager.openDatabase();
 		});
 
 		ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
 			// Saves the data, performs "optimization" and closes the database.
-			DatabaseManager.close();
+			DatabaseManager.closeDatabase();
 		});
 
 		LOGGER.info("Hello Fabric world!");
