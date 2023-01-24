@@ -16,9 +16,9 @@ public class DatabaseManager {
 
 	public static final Logger LOGGER = LoggerFactory.getLogger("fabrissentials.database");
 
-	public static void createDatabase() {
+	public static void create() {
 		// TODO: Make the Database File Path changeable via a Config
-		boolean newDatabase = !(new File("database.db").exists());
+		boolean newDatabase = !new File("database.db").exists();
 
 		// The Commands that are run are from
 		// https://cj.rs/blog/sqlite-pragma-cheatsheet-for-performance-and-consistency/
@@ -41,7 +41,7 @@ public class DatabaseManager {
 
 		if (newDatabase) {
 			// If the database is new, we need to create the tables
-			populateDatabase();
+			populate();
 		} else {
 			// If the database is not new, we need to transfer the data from the old
 			// database into the new database format.
@@ -50,8 +50,9 @@ public class DatabaseManager {
 	}
 
 	public static void migrate() {
+		assert Fabrissentials.databaseConnection != null;
+
 		try {
-			assert Fabrissentials.databaseConnection != null;
 			Statement statement = Fabrissentials.databaseConnection.createStatement();
 			ResultSet versionResult = statement.executeQuery("PRAGMA schema.user_version;");
 			int version = versionResult.getInt("user_version");
@@ -77,11 +78,11 @@ public class DatabaseManager {
 		}
 	}
 
-	public static void populateDatabase() {
+	public static void populate() {
+		assert Fabrissentials.databaseConnection != null;
 		LOGGER.info("Creating the database...");
 
 		try {
-			assert Fabrissentials.databaseConnection != null;
 			Statement statement = Fabrissentials.databaseConnection.createStatement();
 
 			// Insert the current version of the database
@@ -110,7 +111,7 @@ public class DatabaseManager {
 		}
 	}
 
-	public static void closeDatabase() {
+	public static void close() {
 		if (Fabrissentials.databaseConnection != null) {
 			try {
 				Statement statement = Fabrissentials.databaseConnection.createStatement();
