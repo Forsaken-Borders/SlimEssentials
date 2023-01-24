@@ -19,6 +19,9 @@ public class Fabrissentials implements DedicatedServerModInitializer {
 			// This method will create the database, migrate it if required or create the
 			// tables if the database is new.
 			DatabaseManager.openDatabase();
+
+			// Register all commands after the database has been created.
+			CommandHandler.registerCommands(server.getCommandManager().getDispatcher());
 		});
 
 		ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
