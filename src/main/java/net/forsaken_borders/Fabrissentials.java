@@ -30,6 +30,5 @@ public class Fabrissentials implements DedicatedServerModInitializer {
 			DatabaseManager.closeDatabase();
 		});
 
-		LOGGER.info(Text.translatable("command.test.testing").getString());
 	}
 }
