@@ -17,6 +17,11 @@ repositories {
 	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
+
+    // Needed for MidnightLib
+    maven {
+        url = "https://api.modrinth.com/maven"
+    }
 }
 
 loom {
@@ -40,7 +45,10 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	// SQLite Driver for the Java Database Connectivity API
-	implementation group: 'org.xerial', name: 'sqlite-jdbc', version: '3.40.0.0'
+    implementation group: 'org.xerial', name: 'sqlite-jdbc', version: "${project.sqlite_jdbc_version}"
+
+    // MidnightLib for our Mod Config
+    modImplementation "maven.modrinth:midnightlib:${project.midnightlib_version}"
 }
 
 processResources {
