@@ -21,6 +21,8 @@ public class Fabrissentials implements DedicatedServerModInitializer {
 			// tables if the database is new.
 			DatabaseManager.openDatabase();
 
+			// Pass the MinecraftServer to our Annotation Processor,
+			// so it knows what Server to register our Commands to
 			EssentialCommandProcessor.server = server;
 
 			// Register all commands after the database has been created.
