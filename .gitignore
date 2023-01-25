@@ -31,7 +31,6 @@ bin/
 # fabric
 
 run/
-bin/main/assets/fabrissentials/lang
 # java
 
 hs_err_*.log
