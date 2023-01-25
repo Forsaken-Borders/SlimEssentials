@@ -1,7 +1,7 @@
 // TODO: do something with this
 buildscript {
     dependencies {
-        classpath 'de.guntram.mcmod:crowdin-translate:1.4+1.19.3'
+        classpath "de.guntram.mcmod:crowdin-translate:${crowdin_translate_version}"
     }
     repositories {
         maven {
@@ -61,7 +61,7 @@ dependencies {
     // MidnightLib for our Mod Config
     modImplementation "maven.modrinth:midnightlib:${project.midnightlib_version}"
 
-	compileOnly 'de.guntram.mcmod:crowdin-translate:1.4+1.19.3'
+	compileOnly "de.guntram.mcmod:crowdin-translate:${crowdin_translate_version}"
 }
 
 processResources {
