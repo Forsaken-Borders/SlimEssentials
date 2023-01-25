@@ -1,3 +1,16 @@
+// TODO: do something with this
+buildscript {
+    dependencies {
+        classpath 'de.guntram.mcmod:crowdin-translate:1.4+1.19.3'
+    }
+    repositories {
+        maven {
+            name = 'CrowdinTranslate source'
+            url = "https://minecraft.guntram.de/maven/"
+        }
+    }
+}
+
 plugins {
 	id 'fabric-loom' version '1.0-SNAPSHOT'
 	id 'maven-publish'
@@ -93,6 +106,13 @@ publishing {
 	}
 }
 
+
+apply plugin: 'de.guntram.mcmod.crowdin-translate'
+crowdintranslate.crowdinProjectName = 'Fabrissentials'
+crowdintranslate.verbose = false
+build {
+    dependsOn downloadTranslations
+}
 
 import com.modrinth.minotaur.dependencies.DependencyType
 import com.modrinth.minotaur.dependencies.ModDependency
