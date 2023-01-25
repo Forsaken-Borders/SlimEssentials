@@ -28,5 +28,14 @@
 		"minecraft": "~1.19.3",
 		"java": ">=17",
 		"fabric-api": "*"
-	}
+	},
+    "custom": {
+        "modmenu": {
+            "links": {
+                "fabrissentials.github": "https://github.com/Forsaken-Borders/Fabrissentials",
+                "fabrissentials.discord": "https://discord.gg/Bsv7zSFygc"
+            },
+            "badges": []
+        }
+    }
 }
