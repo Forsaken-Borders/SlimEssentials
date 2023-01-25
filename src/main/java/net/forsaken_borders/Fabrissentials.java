@@ -30,5 +30,6 @@ public class Fabrissentials implements DedicatedServerModInitializer {
 			DatabaseManager.closeDatabase();
 		});
 
+		LOGGER.info("Hello Fabric world!");
 	}
 }
