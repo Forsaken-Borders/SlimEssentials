@@ -48,7 +48,7 @@ dependencies {
     // MidnightLib for our Mod Config
     modImplementation "maven.modrinth:midnightlib:${project.midnightlib_version}"
 
-	compileOnly 'de.guntram.mcmod:crowdin-translate:1.4+1.19'
+	compileOnly 'de.guntram.mcmod:crowdin-translate:1.4+1.19.3'
 }
 
 processResources {
