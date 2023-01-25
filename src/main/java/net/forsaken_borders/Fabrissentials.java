@@ -2,6 +2,7 @@ package net.forsaken_borders;
 
 import java.sql.Connection;
 
+import net.forsaken_borders.annotations.EssentialCommandProcessor;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,8 @@ public class Fabrissentials implements DedicatedServerModInitializer {
 			// This method will create the database, migrate it if required or create the
 			// tables if the database is new.
 			DatabaseManager.openDatabase();
+
+			EssentialCommandProcessor.server = server;
 
 			// Register all commands after the database has been created.
 			CommandHandler.registerCommands(server.getCommandManager().getDispatcher());
