@@ -51,6 +51,10 @@ processResources {
 	}
 }
 
+tasks.withType(JavaCompile) {
+    options.compilerArgs += ['-processor EssentialCommandProcessor']
+}
+
 tasks.withType(JavaCompile).configureEach {
 	it.options.release = 17
 }
