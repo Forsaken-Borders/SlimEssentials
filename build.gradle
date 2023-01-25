@@ -41,6 +41,9 @@ dependencies {
 
 	// SQLite Driver for the Java Database Connectivity API
 	implementation group: 'org.xerial', name: 'sqlite-jdbc', version: '3.40.0.0'
+
+    // Enable our Command Annotation Processor
+    implementation 'com.google.auto.service:auto-service:1.0.1'
 }
 
 processResources {
@@ -52,7 +55,10 @@ processResources {
 }
 
 tasks.withType(JavaCompile) {
-    options.compilerArgs += ['-processor EssentialCommandProcessor']
+    options.compilerArgs << "-processorpath"
+    options.compilerArgs << configurations.annotationProcessor.asPath
+    options.compilerArgs << "-processor"
+    options.compilerArgs << "net.forsaken_borders.annotations.EssentialCommandProcessor"
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -89,6 +95,9 @@ publishing {
 	}
 }
 
+configurations {
+    annotationProcessor
+}
 
 import com.modrinth.minotaur.dependencies.DependencyType
 import com.modrinth.minotaur.dependencies.ModDependency
