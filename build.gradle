@@ -33,6 +33,10 @@ repositories {
 
     // Needed for MidnightLib
     maven { url = "https://api.modrinth.com/maven" }
+    maven {
+        name = 'CrowdinTranslate source'
+        url = "https://minecraft.guntram.de/maven/"
+    }
 }
 
 loom {
