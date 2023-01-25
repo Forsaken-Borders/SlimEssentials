@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
+import net.minecraft.text.Text;
 
 public class Fabrissentials implements DedicatedServerModInitializer {
 
@@ -29,6 +30,6 @@ public class Fabrissentials implements DedicatedServerModInitializer {
 			DatabaseManager.closeDatabase();
 		});
 
-		LOGGER.info("Hello Fabric world!");
+		LOGGER.info(Text.translatable("command.test.testing").getString());
 	}
 }
