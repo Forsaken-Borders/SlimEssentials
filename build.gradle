@@ -20,9 +20,6 @@ repositories {
 
     // Needed for MidnightLib
     maven { url = "https://api.modrinth.com/maven" }
-
-    // Needed for ModMenu
-    maven { url = "https://maven.terraformersmc.com/releases" }
 }
 
 loom {
@@ -50,9 +47,6 @@ dependencies {
 
     // MidnightLib for our Mod Config
     modImplementation "maven.modrinth:midnightlib:${project.midnightlib_version}"
-
-    // ModMenu for our custom Info and MidnightLib
-    modCompileOnlyApi "com.terraformersmc:modmenu:${project.modmenu_version}"
 }
 
 processResources {

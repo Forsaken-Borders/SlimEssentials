@@ -1,16 +1,16 @@
 package net.forsaken_borders;
 
-import java.sql.Connection;
-
 import eu.midnightdust.lib.config.MidnightConfig;
+import net.fabricmc.api.DedicatedServerModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.fabricmc.api.DedicatedServerModInitializer;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import java.sql.Connection;
 
 public class Fabrissentials implements DedicatedServerModInitializer {
+
 	public static @Nullable Connection databaseConnection;
 	public static final Logger LOGGER = LoggerFactory.getLogger("fabrissentials");
 
