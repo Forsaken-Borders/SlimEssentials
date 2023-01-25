@@ -113,6 +113,7 @@ publishing {
 
 apply plugin: 'de.guntram.mcmod.crowdin-translate'
 crowdintranslate.crowdinProjectName = 'Fabrissentials'
+crowdintranslate.minecraftProjectName = 'fabrissentials'
 crowdintranslate.verbose = false
 build {
     dependsOn downloadTranslations
