@@ -2,6 +2,7 @@ package net.forsaken_borders;
 
 import java.sql.Connection;
 
+import eu.midnightdust.lib.config.MidnightConfig;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,8 @@ public class Fabrissentials implements DedicatedServerModInitializer {
 
 	@Override
 	public void onInitializeServer() {
+		MidnightConfig.init("fabrissentials", FabrissentialsConfig.class);
+
 		ServerLifecycleEvents.SERVER_STARTING.register(server -> {
 			// This method will create the database, migrate it if required or create the
 			// tables if the database is new.
