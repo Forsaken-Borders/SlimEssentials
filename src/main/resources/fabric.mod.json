@@ -5,12 +5,25 @@
 	"name": "Fabrissentials",
 	"description": "Fabrissentials provides a variety of essential commands",
 	"authors": [
-		"Lunar#9860",
-		"AaronVB#6662"
+      {
+        "name": "OoLunar",
+        "contact": {
+          "homepage": "https://github.com/OoLunar"
+
+        }
+      },
+      {
+        "name": "AaronVB",
+        "contact": {
+          "homepage": "https://github.com/Aaron2550"
+        }
+      }
+
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://discord.gg/Bsv7zSFygc",
+		"sources": "https://github.com/Forsaken-Borders/Fabrissentials",
+        "issues": "https://github.com/Forsaken-Borders/Fabrissentials/issues"
 	},
 	"license": "GNU Lesser General Public License v3.0",
 	"icon": "assets/fabrissentials/icon.png",
