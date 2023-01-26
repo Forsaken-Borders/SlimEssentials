@@ -1,15 +1,13 @@
 package net.forsaken_borders;
 
-import java.sql.Connection;
-
+import eu.midnightdust.lib.config.MidnightConfig;
+import net.fabricmc.api.DedicatedServerModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import eu.midnightdust.lib.config.MidnightConfig;
-import net.fabricmc.api.DedicatedServerModInitializer;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.forsaken_borders.annotations.EssentialCommandProcessor;
+import java.sql.Connection;
 
 public class Fabrissentials implements DedicatedServerModInitializer {
 
@@ -24,10 +22,6 @@ public class Fabrissentials implements DedicatedServerModInitializer {
 			// This method will create the database, migrate it if required or create the
 			// tables if the database is new.
 			DatabaseManager.openDatabase();
-
-			// Pass the MinecraftServer to our Annotation Processor,
-			// so it knows what Server to register our Commands to
-			EssentialCommandProcessor.server = server;
 
 			// Register all commands after the database has been created.
 			CommandHandler.registerCommands(server.getCommandManager().getDispatcher());
