@@ -14,7 +14,6 @@ public class HomeCommand implements Command<ServerCommandSource> {
 
 	@Override
 	public int run(CommandContext<ServerCommandSource> context) {
-		// TODO: Translations (yes, here too)!
 		ServerPlayerEntity player = context.getSource().getPlayer();
 		if (player == null) {
 			return -1;
@@ -23,7 +22,7 @@ public class HomeCommand implements Command<ServerCommandSource> {
 		ArrayList<Point> homes = DatabaseHandler.getHomePointsForPlayer(player);
 		String homeName = context.getArgument("name", String.class);
 		if (homes.stream().noneMatch(home -> home.id().equals(homeName))) {
-			player.sendMessage(Text.literal("You do not have a Home called '" + homeName + "'."));
+			player.sendMessage(Text.translatable("command.home.nohome", homeName));
 			return 0;
 		}
 

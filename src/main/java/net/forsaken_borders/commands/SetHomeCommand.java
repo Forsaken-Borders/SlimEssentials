@@ -16,8 +16,6 @@ import java.util.ArrayList;
 public class SetHomeCommand implements Command<ServerCommandSource> {
 	@Override
 	public int run(CommandContext<ServerCommandSource> context) {
-		// TODO: Translations!
-
 		ServerPlayerEntity player = context.getSource().getPlayer();
 		if (player == null) {
 			return -1;
@@ -27,20 +25,20 @@ public class SetHomeCommand implements Command<ServerCommandSource> {
 		String homeName = context.getArgument("name", String.class);
 
 		if (homes.size() >= FabrissentialsConfig.maxAmountOfHomes) {
-			player.sendMessage(Text.literal("You already have the maximum amount of homes."));
+			player.sendMessage(Text.translatable("command.sethome.maxhomes"));
 			return 0;
 		} else if (homes.stream().anyMatch(home -> home.id().equals(homeName))) {
-			player.sendMessage(Text.literal("You already have a Home called '" + homeName + "'."));
+			player.sendMessage(Text.translatable("command.sethome.samehome"));
 			return 0;
 		}
 
 		try {
 			DatabaseHandler.createHomePointForPlayer(player, homeName);
-			player.sendMessage(Text.literal("Your new Home was created successfully."));
+			player.sendMessage(Text.translatable("command.sethome.success"));
 			return 1;
 		} catch (SQLException exception) {
 			DatabaseManager.LOGGER.error("Creating a new Home failed.", exception);
-			player.sendMessage(Text.literal("There was an internal Error."));
+			player.sendMessage(Text.translatable("command.sethome.error"));
 			return -1;
 		}
 	}
