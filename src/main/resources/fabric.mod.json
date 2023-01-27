@@ -1,47 +1,52 @@
 {
-	"schemaVersion": 1,
-	"id": "fabrissentials",
-	"version": "${version}",
-	"name": "Fabrissentials",
-	"description": "Fabrissentials provides a variety of essential commands",
-	"authors": [
-      {
-        "name": "OoLunar",
-        "contact": {
-          "homepage": "https://github.com/OoLunar"
-
+    "schemaVersion": 1,
+    "id": "fabrissentials",
+    "version": "${version}",
+    "name": "Fabrissentials",
+    "description": "Fabrissentials provides a variety of essential commands",
+    "authors": [
+        {
+            "name": "OoLunar",
+            "contact": {
+                "email": "lunar@forsaken-borders.net",
+                "homepage": "https://github.com/OoLunar"
+            }
+        },
+        {
+            "name": "AaronVB",
+            "contact": {
+                "homepage": "https://github.com/Aaron2550"
+            }
+        },
+        {
+            "name": "InFTord",
+            "contact": {
+                "homepage": "https://github.com/InFTord"
+            }
         }
-      },
-      {
-        "name": "AaronVB",
-        "contact": {
-          "homepage": "https://github.com/Aaron2550"
-        }
-      }
-
-	],
-	"contact": {
-		"homepage": "https://discord.gg/Bsv7zSFygc",
-		"sources": "https://github.com/Forsaken-Borders/Fabrissentials",
+    ],
+    "contact": {
+        "homepage": "https://discord.gg/Bsv7zSFygc",
+        "sources": "https://github.com/Forsaken-Borders/Fabrissentials",
         "issues": "https://github.com/Forsaken-Borders/Fabrissentials/issues"
-	},
-	"license": "GNU Lesser General Public License v3.0",
-	"icon": "assets/fabrissentials/icon.png",
-	"environment": "server",
-	"entrypoints": {
-		"server": [
-			"net.forsaken_borders.Fabrissentials"
-		]
-	},
-	"mixins": [
-		"fabrissentials.mixins.json"
-	],
-	"depends": {
-		"fabricloader": ">=0.14.13",
-		"minecraft": "~1.19.3",
-		"java": ">=17",
-		"fabric-api": "*"
-	},
+    },
+    "license": "GNU Lesser General Public License v3.0",
+    "icon": "assets/fabrissentials/icon.png",
+    "environment": "server",
+    "entrypoints": {
+        "server": [
+            "net.forsaken_borders.Fabrissentials"
+        ]
+    },
+    "mixins": [
+        "fabrissentials.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=0.14.13",
+        "minecraft": "~1.19.3",
+        "java": ">=17",
+        "fabric-api": "*"
+    },
     "custom": {
         "modmenu": {
             "links": {
