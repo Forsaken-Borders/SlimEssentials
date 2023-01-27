@@ -49,7 +49,7 @@ public final class DatabaseHandler {
 		Identifier worldIdentifier = player.getWorld().getRegistryKey().getValue();
 		Vec3d position = player.getPos();
 
-		PreparedStatement statement = Fabrissentials.databaseConnection.prepareStatement("INSERT INTO \"Homes\" VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+		PreparedStatement statement = Fabrissentials.databaseConnection.prepareStatement("INSERT INTO \"Homes\" VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
 		statement.setString(1, homeName);
 		statement.setBytes(2, bytesFromUuid(player.getUuid()));
 		statement.setString(3, worldIdentifier.getNamespace() + ":" + worldIdentifier.getPath());
