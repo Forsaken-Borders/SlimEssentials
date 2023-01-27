@@ -1,22 +1,22 @@
 package net.forsaken_borders;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import com.mojang.brigadier.tree.RootCommandNode;
+
 import net.forsaken_borders.models.Point;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-
 public class CommandHandler {
 	public static void registerCommands(CommandDispatcher<ServerCommandSource> commandDispatcher) {
-
 		RootCommandNode<ServerCommandSource> rootNode = commandDispatcher.getRoot();
 
 		// Unban Command - Alies for /pardon
@@ -48,7 +48,7 @@ public class CommandHandler {
 
 					ServerPlayerEntity player = context.getSource().getPlayer();
 					if (player == null) {
-						return 0;
+						return -1;
 					}
 
 					ArrayList<Point> homes = DatabaseHandler.getHomePointsForPlayer(player);
@@ -71,7 +71,7 @@ public class CommandHandler {
 
 					} catch (SQLException exception) {
 						player.sendMessage(Text.literal("There was an internal Error."));
-						return 0;
+						return -1;
 					}
 				}).build();
 
@@ -84,15 +84,13 @@ public class CommandHandler {
 				.then(RequiredArgumentBuilder.argument("name", StringArgumentType.greedyString()))
 				.executes((context) -> {
 					// TODO: Translations (yes, here too)!
-
 					ServerPlayerEntity player = context.getSource().getPlayer();
 					if (player == null) {
-						return 0;
+						return -1;
 					}
 
 					ArrayList<Point> homes = DatabaseHandler.getHomePointsForPlayer(player);
 					String homeName = context.getArgument("name", String.class);
-
 					if (homes.stream().noneMatch(home -> home.id().equals(homeName))) {
 						player.sendMessage(Text.literal("You do not have a Home called '" + homeName + "'."));
 						return 0;

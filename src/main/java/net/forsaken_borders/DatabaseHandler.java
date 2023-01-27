@@ -1,10 +1,5 @@
 package net.forsaken_borders;
 
-import net.forsaken_borders.models.Point;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Vec3d;
-
 import java.nio.ByteBuffer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,8 +7,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public final class DatabaseHandler {
+import net.forsaken_borders.models.Point;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec3d;
 
+public final class DatabaseHandler {
 	public static ArrayList<Point> getHomePointsForPlayer(ServerPlayerEntity player) {
 		ArrayList<Point> homes = new ArrayList<>();
 
@@ -24,6 +23,7 @@ public final class DatabaseHandler {
 			statement.setBytes(1, bytesFromUuid(player.getUuid()));
 			ResultSet result = statement.executeQuery();
 
+			// Iterate over all results storing them in the homes ArrayList
 			while (result.next()) {
 				homes.add(new Point(
 					result.getString("HomeID"),
