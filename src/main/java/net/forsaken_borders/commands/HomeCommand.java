@@ -1,21 +1,19 @@
 package net.forsaken_borders.commands;
 
-import java.util.ArrayList;
-
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-
 import net.forsaken_borders.DatabaseHandler;
 import net.forsaken_borders.models.Point;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 
+import java.util.ArrayList;
+
 public class HomeCommand implements Command<ServerCommandSource> {
 
 	@Override
-	public int run(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
+	public int run(CommandContext<ServerCommandSource> context) {
 		// TODO: Translations (yes, here too)!
 		ServerPlayerEntity player = context.getSource().getPlayer();
 		if (player == null) {
@@ -37,7 +35,10 @@ public class HomeCommand implements Command<ServerCommandSource> {
 		// https://jd.papermc.io/paper/1.19/org/bukkit/entity/Entity.html#getLastDamageCause()
 		// Make it toggleable via the config ofc
 
-		Point selectedHome = homes.stream().filter(home -> home.id().equals(homeName)).findFirst().get();
+		// .orElseThrow() will never throw here. We check if a home with the given name exists in the list
+		// and return if it does not.
+		Point selectedHome = homes.stream().filter(home -> home.id().equals(homeName)).findFirst().orElseThrow();
+
 		// FIXME: I have no idea how to get the world back from our namespace:key format
 		// Maybe this:
 		// player.getWorld().getRegistryKey().getRegistry().withPath(string path)

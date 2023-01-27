@@ -1,22 +1,21 @@
 package net.forsaken_borders.commands;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-
 import net.forsaken_borders.DatabaseHandler;
+import net.forsaken_borders.DatabaseManager;
 import net.forsaken_borders.FabrissentialsConfig;
 import net.forsaken_borders.models.Point;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 public class SetHomeCommand implements Command<ServerCommandSource> {
 	@Override
-	public int run(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
+	public int run(CommandContext<ServerCommandSource> context) {
 		// TODO: Translations!
 
 		ServerPlayerEntity player = context.getSource().getPlayer();
@@ -40,6 +39,7 @@ public class SetHomeCommand implements Command<ServerCommandSource> {
 			player.sendMessage(Text.literal("Your new Home was created successfully."));
 			return 1;
 		} catch (SQLException exception) {
+			DatabaseManager.LOGGER.error("Creating a new Home failed.", exception);
 			player.sendMessage(Text.literal("There was an internal Error."));
 			return -1;
 		}
