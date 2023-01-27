@@ -14,7 +14,6 @@ public class HomeCommand implements Command<ServerCommandSource> {
 
 	@Override
 	public int run(CommandContext<ServerCommandSource> context) {
-		// TODO: Translations (yes, here too)!
 		ServerPlayerEntity player = context.getSource().getPlayer();
 		if (player == null) {
 			return -1;
