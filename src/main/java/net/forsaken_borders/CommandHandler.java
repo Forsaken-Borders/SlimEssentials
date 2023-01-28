@@ -2,7 +2,6 @@ package net.forsaken_borders;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
-import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import com.mojang.brigadier.tree.RootCommandNode;
 
@@ -13,6 +12,8 @@ import net.forsaken_borders.commands.UnbanIpCommand;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 
+import static net.minecraft.server.command.CommandManager.argument;
+
 public class CommandHandler {
 	public static void registerCommands(CommandDispatcher<ServerCommandSource> commandDispatcher) {
 		RootCommandNode<ServerCommandSource> rootNode = commandDispatcher.getRoot();
@@ -21,8 +22,9 @@ public class CommandHandler {
 		{
 			// TODO: Add Suggestions for banned players
 			LiteralCommandNode<ServerCommandSource> unbancommandNode = CommandManager.literal("unban")
-				.then(RequiredArgumentBuilder.argument("player", StringArgumentType.greedyString()))
-				.executes(new UnbanCommand()::run).build();
+				.then(
+					argument("player", StringArgumentType.greedyString()).executes(new UnbanCommand())
+				).build();
 
 			rootNode.addChild(unbancommandNode);
 		}
@@ -31,8 +33,9 @@ public class CommandHandler {
 		{
 			// TODO: Add Suggestions for banned IPs
 			LiteralCommandNode<ServerCommandSource> unbanIpCommandNode = CommandManager.literal("unban-ip")
-				.then(RequiredArgumentBuilder.argument("ip", StringArgumentType.greedyString()))
-				.executes(new UnbanIpCommand()::run).build();
+				.then(
+					argument("ip", StringArgumentType.greedyString()).executes(new UnbanIpCommand())
+				).build();
 
 			rootNode.addChild(unbanIpCommandNode);
 		}
@@ -40,8 +43,9 @@ public class CommandHandler {
 		// Sethome Command - Set a Home Point
 		{
 			LiteralCommandNode<ServerCommandSource> sethomeCommandNode = CommandManager.literal("sethome")
-				.then(RequiredArgumentBuilder.argument("name", StringArgumentType.greedyString()))
-				.executes(new SetHomeCommand()::run).build();
+				.then(
+					argument("name", StringArgumentType.greedyString()).executes(new SetHomeCommand())
+				).build();
 
 			rootNode.addChild(sethomeCommandNode);
 		}
@@ -49,8 +53,9 @@ public class CommandHandler {
 		// Home Command - Teleport to a Home Point
 		{
 			LiteralCommandNode<ServerCommandSource> homeCommandNode = CommandManager.literal("home")
-				.then(RequiredArgumentBuilder.argument("name", StringArgumentType.greedyString()))
-				.executes(new HomeCommand()::run).build();
+				.then(
+					argument("name", StringArgumentType.greedyString()).executes(new HomeCommand())
+				).build();
 
 			rootNode.addChild(homeCommandNode);
 		}
