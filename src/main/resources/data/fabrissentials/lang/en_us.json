@@ -1,0 +1,8 @@
+{
+  "command.home.nohome": "You do not have a Home called %d.",
+  "command.sethome.maxhomes": "You already have the maximum amount of homes.",
+  "command.sethome.samehome": "You already have a Home called %d.",
+  "command.sethome.success": "Your new Home was created successfully.",
+  "command.sethome.error": "There was an internal Error."
+}
+
