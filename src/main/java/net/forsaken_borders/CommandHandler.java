@@ -20,39 +20,39 @@ public class CommandHandler {
 		// Unban Command - Alies for /pardon
 		{
 			// TODO: Add Suggestions for banned players
-			LiteralCommandNode<ServerCommandSource> commandNode = CommandManager.literal("unban")
+			LiteralCommandNode<ServerCommandSource> unbancommandNode = CommandManager.literal("unban")
 				.then(RequiredArgumentBuilder.argument("player", StringArgumentType.greedyString()))
 				.executes(new UnbanCommand()::run).build();
 
-			rootNode.addChild(commandNode);
+			rootNode.addChild(unbancommandNode);
 		}
 
 		// Unban IP Command - Alias for /pardon-ip
 		{
 			// TODO: Add Suggestions for banned IPs
-			LiteralCommandNode<ServerCommandSource> unbanCommandNode = CommandManager.literal("unban-ip")
+			LiteralCommandNode<ServerCommandSource> unbanIpCommandNode = CommandManager.literal("unban-ip")
 				.then(RequiredArgumentBuilder.argument("ip", StringArgumentType.greedyString()))
 				.executes(new UnbanIpCommand()::run).build();
 
-			rootNode.addChild(unbanCommandNode);
+			rootNode.addChild(unbanIpCommandNode);
 		}
 
 		// Sethome Command - Set a Home Point
 		{
-			LiteralCommandNode<ServerCommandSource> unbanCommandNode = CommandManager.literal("sethome")
+			LiteralCommandNode<ServerCommandSource> sethomeCommandNode = CommandManager.literal("sethome")
 				.then(RequiredArgumentBuilder.argument("name", StringArgumentType.greedyString()))
 				.executes(new SetHomeCommand()::run).build();
 
-			rootNode.addChild(unbanCommandNode);
+			rootNode.addChild(sethomeCommandNode);
 		}
 
 		// Home Command - Teleport to a Home Point
 		{
-			LiteralCommandNode<ServerCommandSource> unbanCommandNode = CommandManager.literal("home")
+			LiteralCommandNode<ServerCommandSource> homeCommandNode = CommandManager.literal("home")
 				.then(RequiredArgumentBuilder.argument("name", StringArgumentType.greedyString()))
 				.executes(new HomeCommand()::run).build();
 
-			rootNode.addChild(unbanCommandNode);
+			rootNode.addChild(homeCommandNode);
 		}
 	}
 }
