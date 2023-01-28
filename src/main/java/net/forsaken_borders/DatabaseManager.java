@@ -94,7 +94,7 @@ public final class DatabaseManager {
 			}
 
 			// Set the database version to the current version on a successful migration.
-			statement.execute("PRAGMA schema.user_version = " + DATABASE_VERSION + ";");
+
 			statement.close();
 		} catch (SQLException error) {
 			LOGGER.error("Failed to migrate the database!", error);
@@ -116,12 +116,10 @@ public final class DatabaseManager {
 			statement.execute("PRAGMA user_version = " + DATABASE_VERSION + ";");
 
 			// Create the homes table for the /home command, and use a unique key to make sure a player cannot create two homes with the same name
-			statement.execute("CREATE TABLE IF NOT EXISTS \"Homes\" (\"HomeID\" TEXT NOT NULL, \"PlayerID\" BLOB NOT NULL, \"WorldID\" BLOB NOT NULL, \"X\" REAL NOT NULL, \"Y\" REAL NOT NULL, \"Z\" REAL NOT NULL, \"Pitch\" REAL NOT NULL, \"Yaw\" REAL NOT NULL);");
-			statement.execute("ALTER TABLE \"Homes\" ADD CONSTRAINT \"UniqueHomeIdPerPlayer\" UNIQUE (\"HomeID\", \"PlayerID\");");
+			statement.execute("CREATE TABLE IF NOT EXISTS \"Homes\" (\"HomeID\" TEXT NOT NULL, \"PlayerID\" BLOB NOT NULL, \"WorldID\" BLOB NOT NULL, \"X\" REAL NOT NULL, \"Y\" REAL NOT NULL, \"Z\" REAL NOT NULL, \"Pitch\" REAL NOT NULL, \"Yaw\" REAL NOT NULL, CONSTRAINT \"UniqueHomeIdPerPlayer\" UNIQUE (\"HomeID\", \"PlayerID\"));");
 
 			// Create the warps table for the /warp command, and use a unique key to make sure each warp has a unique id
-			statement.execute("CREATE TABLE IF NOT EXISTS \"Warps\" (\"WarpID\" TEXT NOT NULL, \"PlayerID\" BLOB NOT NULL, \"WorldID\" BLOB NOT NULL, \"X\" REAL NOT NULL, \"Y\" REAL NOT NULL, \"Z\" REAL NOT NULL, \"Pitch\" REAL NOT NULL, \"Yaw\" REAL NOT NULL);");
-			statement.execute("ALTER TABLE \"Warps\" ADD CONSTRAINT \"UniqueWarpId\" UNIQUE (\"WarpID\");");
+			statement.execute("CREATE TABLE IF NOT EXISTS \"Warps\" (\"WarpID\" TEXT NOT NULL, \"PlayerID\" BLOB NOT NULL, \"WorldID\" BLOB NOT NULL, \"X\" REAL NOT NULL, \"Y\" REAL NOT NULL, \"Z\" REAL NOT NULL, \"Pitch\" REAL NOT NULL, \"Yaw\" REAL NOT NULL, CONSTRAINT \"UniqueWarpId\" UNIQUE (\"WarpID\"))");
 
 			// Close the statement
 			statement.close();
