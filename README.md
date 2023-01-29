@@ -16,6 +16,8 @@ You can find an explanation of the operator levels below.
 | Commands  | Implemented |
 |-----------|-------------|
 | /home     | ✅           |
-| /sethome  | ✅           |
+| /home set | ✅           |
+| /home delete (/home remove) | ✅           |
+| /home invite | WIP           |
 | /unban    | ✅           |
 | /unban-ip | ✅           |
