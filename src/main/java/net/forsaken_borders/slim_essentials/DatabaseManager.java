@@ -1,4 +1,4 @@
-package net.forsaken_borders.fabrissentials_slim;
+package net.forsaken_borders.slim_essentials;
 
 import java.io.File;
 import java.sql.DriverManager;
@@ -27,7 +27,7 @@ public final class DatabaseManager {
 	/***
 	 * The logger that is used to log errors and other messages.
 	 */
-	public static final Logger LOGGER = LoggerFactory.getLogger("fabrissentials.database");
+	public static final Logger LOGGER = LoggerFactory.getLogger("slim_essentials.database");
 
 	/***
 	 * Creates the database connection and creates the tables if the database is
@@ -52,7 +52,7 @@ public final class DatabaseManager {
 
 		try {
 			Class.forName("org.sqlite.JDBC");
-			Fabrissentials.databaseConnection = DriverManager.getConnection("jdbc:sqlite:database.db", DATABASE_PROPERTIES);
+			SlimEssentials.databaseConnection = DriverManager.getConnection("jdbc:sqlite:database.db", DATABASE_PROPERTIES);
 		} catch (Exception error) {
 			LOGGER.error("Failed to create the database connection!", error);
 			return;
@@ -75,10 +75,10 @@ public final class DatabaseManager {
 	 * the current version. Under no circumstances should data loss occur.
 	 */
 	public static void migrateDatabase() {
-		assert Fabrissentials.databaseConnection != null;
+		assert SlimEssentials.databaseConnection != null;
 
 		try {
-			Statement statement = Fabrissentials.databaseConnection.createStatement();
+			Statement statement = SlimEssentials.databaseConnection.createStatement();
 			ResultSet versionResult = statement.executeQuery("PRAGMA user_version;");
 			int version = versionResult.getInt("user_version");
 
@@ -89,7 +89,7 @@ public final class DatabaseManager {
 				default:
 					// We're on an unknown version, likely a newer version than the current one.
 					// Do NOT attempt to touch the database as it may cause data loss.
-					LOGGER.error("The database is on an unknown version! ({}), please ensure you're using the latest version of Fabrissentials!", version);
+					LOGGER.error("The database is on an unknown version! ({}), please ensure you're using the latest version of slim_essentials!", version);
 					return;
 			}
 
@@ -106,11 +106,11 @@ public final class DatabaseManager {
 	 * to the current version.
 	 */
 	public static void setupDatabase() {
-		assert Fabrissentials.databaseConnection != null;
+		assert SlimEssentials.databaseConnection != null;
 		LOGGER.info("Creating the database...");
 
 		try {
-			Statement statement = Fabrissentials.databaseConnection.createStatement();
+			Statement statement = SlimEssentials.databaseConnection.createStatement();
 
 			// Insert the current version of the database
 			statement.execute("PRAGMA user_version = " + DATABASE_VERSION + ";");
@@ -133,9 +133,9 @@ public final class DatabaseManager {
 	 * database.
 	 */
 	public static void closeDatabase() {
-		if (Fabrissentials.databaseConnection != null) {
+		if (SlimEssentials.databaseConnection != null) {
 			try {
-				Statement statement = Fabrissentials.databaseConnection.createStatement();
+				Statement statement = SlimEssentials.databaseConnection.createStatement();
 
 				// The default value is 400, but we're going to set it to 1000 to allow for
 				// longer and more efficient analysis.
@@ -146,15 +146,15 @@ public final class DatabaseManager {
 				statement.execute("PRAGMA optimize;");
 				statement.close();
 			} catch (SQLException exception) {
-				LOGGER.warn("An unexpected error has occurred, please report this to Fabrissentials' GitHub page!", exception);
+				LOGGER.warn("An unexpected error has occurred, please report this to slim_essentials' GitHub page!", exception);
 			}
 		}
 
-		if (Fabrissentials.databaseConnection != null) {
+		if (SlimEssentials.databaseConnection != null) {
 			try {
-				Fabrissentials.databaseConnection.close();
+				SlimEssentials.databaseConnection.close();
 			} catch (SQLException exception) {
-				LOGGER.error("An unexpected error occurred trying to close the database. It's possible some data was lost. Please create a backup of the database before attempting to run Fabrissentials again.", exception);
+				LOGGER.error("An unexpected error occurred trying to close the database. It's possible some data was lost. Please create a backup of the database before attempting to run slim_essentials again.", exception);
 			}
 		}
 	}

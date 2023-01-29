@@ -1,4 +1,4 @@
-package net.forsaken_borders.fabrissentials_slim;
+package net.forsaken_borders.slim_essentials;
 
 import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.DedicatedServerModInitializer;
@@ -9,14 +9,13 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 
-public class Fabrissentials implements DedicatedServerModInitializer {
-
+public class SlimEssentials implements DedicatedServerModInitializer {
 	public static @Nullable Connection databaseConnection;
-	public static final Logger LOGGER = LoggerFactory.getLogger("fabrissentials");
+	public static final Logger LOGGER = LoggerFactory.getLogger("slim_essentials");
 
 	@Override
 	public void onInitializeServer() {
-		MidnightConfig.init("fabrissentials", FabrissentialsConfig.class);
+		MidnightConfig.init("slim_essentials", SlimEssentialsConfig.class);
 
 		ServerLifecycleEvents.SERVER_STARTING.register(server -> {
 			// This method will create the database, migrate it if required or create the

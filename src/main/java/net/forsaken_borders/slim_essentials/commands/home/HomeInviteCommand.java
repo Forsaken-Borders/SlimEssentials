@@ -1,11 +1,11 @@
-package net.forsaken_borders.fabrissentials_slim.commands.home;
+package net.forsaken_borders.slim_essentials.commands.home;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
-import net.forsaken_borders.fabrissentials_slim.DatabaseHandler;
-import net.forsaken_borders.fabrissentials_slim.models.Point;
+import net.forsaken_borders.slim_essentials.DatabaseHandler;
+import net.forsaken_borders.slim_essentials.models.Point;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;

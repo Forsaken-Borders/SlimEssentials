@@ -1,4 +1,4 @@
-package net.forsaken_borders.fabrissentials_slim;
+package net.forsaken_borders.slim_essentials;
 
 import java.nio.ByteBuffer;
 import java.sql.PreparedStatement;
@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import net.forsaken_borders.fabrissentials_slim.models.Point;
+import net.forsaken_borders.slim_essentials.models.Point;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
@@ -17,9 +17,9 @@ public final class DatabaseHandler {
 		ArrayList<Point> homes = new ArrayList<>();
 
 		try {
-			assert Fabrissentials.databaseConnection != null;
+			assert SlimEssentials.databaseConnection != null;
 
-			PreparedStatement statement = Fabrissentials.databaseConnection.prepareStatement("SELECT * FROM \"Homes\" WHERE \"PlayerID\" = ?;");
+			PreparedStatement statement = SlimEssentials.databaseConnection.prepareStatement("SELECT * FROM \"Homes\" WHERE \"PlayerID\" = ?;");
 			statement.setBytes(1, bytesFromUuid(player.getUuid()));
 			ResultSet result = statement.executeQuery();
 
@@ -44,12 +44,12 @@ public final class DatabaseHandler {
 	}
 
 	public static void createHomePointForPlayer(ServerPlayerEntity player, String homeName) throws SQLException {
-		assert Fabrissentials.databaseConnection != null;
+		assert SlimEssentials.databaseConnection != null;
 
 		Identifier worldIdentifier = player.getWorld().getRegistryKey().getValue();
 		Vec3d position = player.getPos();
 
-		PreparedStatement statement = Fabrissentials.databaseConnection.prepareStatement("INSERT INTO \"Homes\" VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
+		PreparedStatement statement = SlimEssentials.databaseConnection.prepareStatement("INSERT INTO \"Homes\" VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
 		statement.setString(1, homeName);
 		statement.setBytes(2, bytesFromUuid(player.getUuid()));
 		statement.setString(3, worldIdentifier.getNamespace() + ":" + worldIdentifier.getPath());

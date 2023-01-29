@@ -1,16 +1,16 @@
-package net.forsaken_borders.fabrissentials_slim;
+package net.forsaken_borders.slim_essentials;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import com.mojang.brigadier.tree.RootCommandNode;
 
-import net.forsaken_borders.fabrissentials_slim.commands.home.HomeCommand;
-import net.forsaken_borders.fabrissentials_slim.commands.home.HomeDeleteCommand;
-import net.forsaken_borders.fabrissentials_slim.commands.home.HomeInviteCommand;
-import net.forsaken_borders.fabrissentials_slim.commands.home.HomeSetCommand;
-import net.forsaken_borders.fabrissentials_slim.commands.UnbanCommand;
-import net.forsaken_borders.fabrissentials_slim.commands.UnbanIpCommand;
+import net.forsaken_borders.slim_essentials.commands.home.HomeCommand;
+import net.forsaken_borders.slim_essentials.commands.home.HomeDeleteCommand;
+import net.forsaken_borders.slim_essentials.commands.home.HomeInviteCommand;
+import net.forsaken_borders.slim_essentials.commands.home.HomeSetCommand;
+import net.forsaken_borders.slim_essentials.commands.UnbanCommand;
+import net.forsaken_borders.slim_essentials.commands.UnbanIpCommand;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;

@@ -1,18 +1,18 @@
-package net.forsaken_borders.fabrissentials_slim.commands.home;
+package net.forsaken_borders.slim_essentials.commands.home;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
 
-import net.forsaken_borders.fabrissentials_slim.DatabaseHandler;
-import net.forsaken_borders.fabrissentials_slim.DatabaseManager;
-import net.forsaken_borders.fabrissentials_slim.FabrissentialsConfig;
-import net.forsaken_borders.fabrissentials_slim.models.Point;
+import net.forsaken_borders.slim_essentials.DatabaseHandler;
+import net.forsaken_borders.slim_essentials.DatabaseManager;
+import net.forsaken_borders.slim_essentials.SlimEssentialsConfig;
+import net.forsaken_borders.slim_essentials.models.Point;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
-
-import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class HomeSetCommand implements Command<ServerCommandSource> {
 	@Override
@@ -25,7 +25,7 @@ public class HomeSetCommand implements Command<ServerCommandSource> {
 		ArrayList<Point> homes = DatabaseHandler.getHomePointsForPlayer(player);
 		String homeName = context.getArgument("name", String.class);
 
-		if (homes.size() >= FabrissentialsConfig.maxAmountOfHomes) {
+		if (homes.size() >= SlimEssentialsConfig.maxAmountOfHomes) {
 			player.sendMessage(Text.translatable("command.home.set.max_homes"));
 			return 0;
 		} else if (homes.stream().anyMatch(home -> home.id().equals(homeName))) {

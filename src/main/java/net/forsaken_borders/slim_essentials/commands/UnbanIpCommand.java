@@ -1,4 +1,4 @@
-package net.forsaken_borders.fabrissentials_slim.commands;
+package net.forsaken_borders.slim_essentials.commands;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;

@@ -1,9 +1,9 @@
 {
     "schemaVersion": 1,
-    "id": "fabrissentials",
+    "id": "slim_essentials",
     "version": "${version}",
-    "name": "Fabrissentials",
-    "description": "Fabrissentials provides a variety of essential commands",
+    "name": "SlimEssentials",
+    "description": "SlimEssentials provides a variety of essential commands",
     "authors": [
         {
             "name": "OoLunar",
@@ -27,19 +27,19 @@
     ],
     "contact": {
         "homepage": "https://discord.gg/Bsv7zSFygc",
-        "sources": "https://github.com/Forsaken-Borders/Fabrissentials",
-        "issues": "https://github.com/Forsaken-Borders/Fabrissentials/issues"
+        "sources": "https://github.com/Forsaken-Borders/SlimEssentials",
+        "issues": "https://github.com/Forsaken-Borders/SlimEssentials/issues"
     },
     "license": "GNU Lesser General Public License v3.0",
-    "icon": "assets/fabrissentials/icon.png",
+    "icon": "assets/slim_essentials/icon.png",
     "environment": "server",
     "entrypoints": {
         "server": [
-            "net.forsaken_borders.Fabrissentials"
+            "net.forsaken_borders.slim_essentials"
         ]
     },
     "mixins": [
-        "fabrissentials.mixins.json"
+        "slim_essentials.mixins.json"
     ],
     "depends": {
         "fabricloader": ">=0.14.13",
@@ -50,10 +50,9 @@
     "custom": {
         "modmenu": {
             "links": {
-                "fabrissentials.github": "https://github.com/Forsaken-Borders/Fabrissentials",
-                "fabrissentials.discord": "https://discord.gg/Bsv7zSFygc"
-            },
-            "badges": []
+                "slim_essentials.github": "https://github.com/Forsaken-Borders/SlimEssentials",
+                "slim_essentials.discord": "https://discord.gg/Bsv7zSFygc"
+            }
         }
     }
 }
