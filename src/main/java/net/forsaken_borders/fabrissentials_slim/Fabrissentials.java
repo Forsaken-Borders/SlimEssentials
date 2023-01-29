@@ -1,4 +1,4 @@
-package net.forsaken_borders;
+package net.forsaken_borders.fabrissentials_slim;
 
 import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.DedicatedServerModInitializer;

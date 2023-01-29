@@ -1,4 +1,4 @@
-package net.forsaken_borders.models;
+package net.forsaken_borders.fabrissentials_slim.models;
 
 import java.util.Objects;
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package net.forsaken_borders;
+package net.forsaken_borders.fabrissentials_slim;
 
 import java.nio.ByteBuffer;
 import java.sql.PreparedStatement;
@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import net.forsaken_borders.models.Point;
+import net.forsaken_borders.fabrissentials_slim.models.Point;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;

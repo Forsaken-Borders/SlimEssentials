@@ -1,4 +1,4 @@
-package net.forsaken_borders;
+package net.forsaken_borders.fabrissentials_slim;
 
 import java.io.File;
 import java.sql.DriverManager;
