@@ -1,5 +1,5 @@
-# Fabrissentials
-Fabrissentials is a mod aiming to add essential commands to Fabric servers.
+# SlimEssentials
+SlimEssentials is a mod aiming to add essential commands to Fabric servers.
 Essential commands include, for example, /home, /warp, /tpr, /mail, and so on.
 
 ## Permissions
@@ -13,11 +13,17 @@ You can find an explanation of the operator levels below.
 - Operators with level 4 can use commands for server management, such as the command /stop to stop the server.
 
 ## Commands
-| Commands                    | Implemented |
-|-----------------------------|-------------|
-| /home                       | ✅           |
-| /home set                   | ✅           |
-| /home delete (/home remove) | ✅           |
-| /home invite                | WIP         |
-| /unban                      | ✅           |
-| /unban-ip                   | ✅           |
+| Command                    | Implemented  |
+|----------------------------|--------------|
+| /unban                     | ✅            |
+| /unban-ip                  | ✅            |
+| /home                      | ✅            |
+| /home set                  | ✅            |
+| /home delete               | ✅            |
+| /home invite               | WIP          |
+| /repair (all/main/offhand) | ✅            |
+| /extinguish (/ext)         | ✅            |
+| /heal                      | ✅            |
+| /feed                      | ✅            |
+| /broadcast                 | ✅            |
+| /hat                       | ✅            |

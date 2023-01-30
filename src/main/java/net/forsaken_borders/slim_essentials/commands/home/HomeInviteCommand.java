@@ -24,7 +24,6 @@ public class HomeInviteCommand implements Command<ServerCommandSource> {
 
 		// The player we're trying to invite
 		ServerPlayerEntity otherPlayer = EntityArgumentType.getPlayer(context, "player");
-
 		if(otherPlayer == player)
 		{
 			player.sendMessage(Text.translatable("command.home.invite.self_invite"));
@@ -36,15 +35,15 @@ public class HomeInviteCommand implements Command<ServerCommandSource> {
 
 		ArrayList<Point> homes = DatabaseHandler.getHomePointsForPlayer(player);
 		Optional<Point> homePoint = homes.stream().filter(home -> home.id().equals(homeName)).findFirst();
-
-
 		if (homePoint.isEmpty()) {
 			player.sendMessage(Text.translatable("command.home.invite.not_found", player.getDisplayName(), homeName));
 			return 0;
 		}
 
 
+		//TODO: Add database call for inviting another player to a home point
 
+		player.sendMessage(Text.translatable("command.home.invite.success", player.getDisplayName(), homeName));
 
 
 		return 0;
