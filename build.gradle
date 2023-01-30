@@ -52,7 +52,7 @@ dependencies {
     // MidnightLib for our Mod Config
     modImplementation "maven.modrinth:midnightlib:${project.midnightlib_version}"
 
-    modImplementation "fr.catcore:server-translations-api:1.4.19+1.19.3"
+    modImplementation "fr.catcore:server-translations-api:${project.servertranslation_api_version}"
 }
 
 processResources {

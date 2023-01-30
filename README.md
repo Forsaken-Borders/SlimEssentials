@@ -13,9 +13,11 @@ You can find an explanation of the operator levels below.
 - Operators with level 4 can use commands for server management, such as the command /stop to stop the server.
 
 ## Commands
-| Commands  | Implemented |
-|-----------|-------------|
-| /home     | ✅           |
-| /sethome  | ✅           |
-| /unban    | ✅           |
-| /unban-ip | ✅           |
+| Commands                    | Implemented |
+|-----------------------------|-------------|
+| /home                       | ✅           |
+| /home set                   | ✅           |
+| /home delete (/home remove) | ✅           |
+| /home invite                | WIP         |
+| /unban                      | ✅           |
+| /unban-ip                   | ✅           |
