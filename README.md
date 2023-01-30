@@ -27,4 +27,3 @@ You can find an explanation of the operator levels below.
 | /feed                      | ✅            |
 | /broadcast                 | ✅            |
 | /hat                       | ✅            |
-
