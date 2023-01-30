@@ -7,7 +7,20 @@
     "command.home.set.error": "Something went wrong while trying to set up a new home point!",
     "command.home.delete.not_found": "You do not have a home called %s.",
     "command.home.delete.success": "Successfully deleted home %s",
-    "command.home.invite.not_found": "Could not invite player %s to point %s because it does not exist!",
-    "command.home.invite.success": "Invited %s to your home %s!",
-    "command.home.invite.self_invite": "You can't invite yourself!"
+    "command.home.invite.not_found": "Could not invite player %s to home %s because it does not exist!",
+    "command.home.invite.success": "Invited player %s to your home %s!",
+    "command.home.invite.self_invite": "You can't invite yourself!",
+
+    "command.repair.main_empty": "You have nothing in your main hand!",
+    "command.repair.off_empty": "You have nothing in your offhand!",
+    "command.repair.norepair": "This item cannot be repaired!",
+    "command.repair.success": "Item repaired!",
+    "command.repair.bulk.none_repaired": "No items in your inventory can be repaired!",
+    "command.repair.bulk.success": "Repaired %d items!",
+
+    "command.heal.success": "Health restored",
+    "command.heal.other_success": "%s's health restored",
+
+    "command.feed.success": "Hunger restored",
+    "command.feed.other_success": "%s's hunger restored"
 }

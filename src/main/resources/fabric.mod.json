@@ -35,7 +35,7 @@
     "environment": "server",
     "entrypoints": {
         "server": [
-            "net.forsaken_borders.slim_essentials"
+            "net.forsaken_borders.slim_essentials.SlimEssentials"
         ]
     },
     "mixins": [
